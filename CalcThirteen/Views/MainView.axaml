@@ -1,0 +1,113 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:CalcThirteen.ViewModels"
+             xmlns:local="clr-namespace:CalcThirteen.Views"
+             x:Class="CalcThirteen.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             Background="#1e1e1e">
+
+	<UserControl.Styles>
+		<Style Selector="local|RadialSectorButton">
+			<Setter Property="Template">
+				<ControlTemplate TargetType="local:RadialSectorButton">
+					<Panel Background="Transparent"/>
+				</ControlTemplate>
+			</Setter>
+			<Setter Property="Background" Value="#f5f5f5"/>
+			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<Style Selector="local|RadialSectorButton.center">
+			<Setter Property="Background" Value="#ffffff"/>
+			<Setter Property="FontSize" Value="40"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+		</Style>
+
+		<Style Selector="local|RadialSectorButton.digit">
+			<Setter Property="FontSize" Value="20"/>
+		</Style>
+
+		<Style Selector="local|RadialSectorButton.hex">
+			<Setter Property="FontWeight" Value="Bold"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Grid ColumnDefinitions="*, Auto, 1.2*">
+		<Grid Grid.Column="0" RowDefinitions="Auto, *" Margin="10">
+			<StackPanel Grid.Row="0" Spacing="5" Margin="0,0,0,15">
+				<TextBlock Text="{Binding Expression}" FontSize="18" Foreground="#888888" TextAlignment="Right" Height="25"/>
+				<TextBlock Text="{Binding DisplayText}" FontSize="36" Foreground="White" TextAlignment="Right" FontWeight="Bold"/>
+			</StackPanel>
+
+			<Viewbox Grid.Row="1" MaxWidth="500" MaxHeight="500">
+				<local:RadialPanel Width="500" Height="500">
+
+					
+					<local:RadialSectorButton Classes="digit" Content="C" Command="{Binding DigitCommand}" CommandParameter="C"
+							StartAngle="-103.85" EndAngle="-76.15" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="0" Command="{Binding DigitCommand}" CommandParameter="0"
+							StartAngle="-76.15" EndAngle="-48.46" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="1" Command="{Binding DigitCommand}" CommandParameter="1"
+							StartAngle="-48.46" EndAngle="-20.77" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="2" Command="{Binding DigitCommand}" CommandParameter="2"
+							StartAngle="-20.77" EndAngle="6.92" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="3" Command="{Binding DigitCommand}" CommandParameter="3"
+							StartAngle="6.92" EndAngle="34.61" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="4" Command="{Binding DigitCommand}" CommandParameter="4"
+							StartAngle="34.61" EndAngle="62.3" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="5" Command="{Binding DigitCommand}" CommandParameter="5"
+							StartAngle="62.3" EndAngle="89.99" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="6" Command="{Binding DigitCommand}" CommandParameter="6"
+							StartAngle="89.99" EndAngle="117.68" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="7" Command="{Binding DigitCommand}" CommandParameter="7"
+							StartAngle="117.68" EndAngle="145.37" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="8" Command="{Binding DigitCommand}" CommandParameter="8"
+							StartAngle="145.37" EndAngle="173.06" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit" Content="9" Command="{Binding DigitCommand}" CommandParameter="9"
+							StartAngle="173.06" EndAngle="200.75" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit hex" Content="A" Command="{Binding DigitCommand}" CommandParameter="A"
+							StartAngle="200.75" EndAngle="228.44" InnerRadius="122" OuterRadius="185"/>
+					<local:RadialSectorButton Classes="digit hex" Content="B" Command="{Binding DigitCommand}" CommandParameter="B"
+							StartAngle="228.44" EndAngle="256.15" InnerRadius="122" OuterRadius="185"/>
+
+					
+					<local:RadialSectorButton Content="CL" Command="{Binding ClearCommand}"
+							StartAngle="-150" EndAngle="-90" InnerRadius="62" OuterRadius="115"/>
+					<local:RadialSectorButton Content="+" Command="{Binding OperatorCommand}" CommandParameter="+"
+							StartAngle="-90" EndAngle="-30" InnerRadius="62" OuterRadius="115"/>
+					<local:RadialSectorButton Content="-" Command="{Binding OperatorCommand}" CommandParameter="-"
+							StartAngle="-30" EndAngle="30" InnerRadius="62" OuterRadius="115"/>
+					<local:RadialSectorButton Content="×" Command="{Binding OperatorCommand}" CommandParameter="*"
+							StartAngle="30" EndAngle="90" InnerRadius="62" OuterRadius="115"/>
+					<local:RadialSectorButton Content="÷" Command="{Binding OperatorCommand}" CommandParameter="/"
+							StartAngle="90" EndAngle="150" InnerRadius="62" OuterRadius="115"/>
+					<local:RadialSectorButton Content="←" Command="{Binding BackspaceCommand}"
+							StartAngle="150" EndAngle="210" InnerRadius="62" OuterRadius="115"/>
+
+					
+					<local:RadialSectorButton Classes="center" Content="=" Command="{Binding CalculateCommand}"
+							StartAngle="0" EndAngle="360" InnerRadius="0" OuterRadius="58"/>
+
+				</local:RadialPanel>
+			</Viewbox>
+		</Grid>
+
+		<GridSplitter Grid.Column="1" Width="6" Background="#333333" ResizeDirection="Columns" ShowsPreview="True"/>
+
+		<Grid Grid.Column="2" RowDefinitions="Auto, *" Margin="15">
+			<TextBlock Grid.Row="0" Text="История вычислений (13-ичная)" FontSize="18" Foreground="#888888" Margin="0,0,0,10" FontWeight="Bold"/>
+			<ListBox Grid.Row="1" ItemsSource="{Binding HistoryLog}" Background="#252526" BorderBrush="#333333" BorderThickness="1">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding}" Foreground="#e1e1e1" FontSize="14" Margin="3"/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+	</Grid>
+</UserControl>
